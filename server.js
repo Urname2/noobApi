@@ -1,4 +1,5 @@
 // server.js
+// https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
 
 // BASE SETUP
 // =============================================================================
@@ -120,8 +121,14 @@ console.log('API available on localhost:' + port);
 //create your own database: https://mongolab.com/
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://username:username@ds061355.mongolab.com:61355/noob/Noob'); // connect to our database
 
+var connectionString = 'mongodb://username:username@ds061355.mongolab.com:61355/noob'; 
+
+if(connectionString)
+	mongoose.connect(connectionString); // connect to our database
+
+else
+	console.log("Missing connectionString!");
 
 var Noob = require('./models/noob');
 
