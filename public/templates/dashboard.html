@@ -1,0 +1,130 @@
+<div class="row">
+	<div class="col-lg-3 col-md-6 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon green pull-left">
+					<i class="fa fa-wheelchair"></i>
+				</div>
+				<div class="title">{{noobs.length}}</div>
+				<div class="comment">Noobs</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-3 col-md-6 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon red pull-left">
+					<i class="fa fa-book"></i>
+				</div>
+				<div class="title">{{courses.length}}</div>
+				<div class="comment">Aktiviteter</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-3 col-md-6 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon blue pull-left">
+					<i class="fa fa-github"></i>
+				</div>
+				<div class="title">5</div>
+				<div class="comment">GIT</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-3 col-md-6 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon orange pull-left">
+					<i class="fa fa-clone"></i>
+				</div>
+				<div class="title">225</div>
+				<div class="comment">Presentasjoner</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<rd-widget>
+      		<rd-widget-header icon="fa-tasks" title="Aktive kurs ({{courses.length}})">
+      		</rd-widget-header>
+      		<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<tbody>
+							<tr ui-sref="class({classID: course._id})" class="courses" ng-repeat="course in courses"><td>{{course.title}}</td><td>{{course.length}} timer</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+						</tbody>
+					</table>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-users" title="Noobs">
+				<!--<input type="text" placeholder="Search" class="form-control input-sm" />-->
+			</rd-widget-header>
+			<rd-widget-body classes="medium no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr><th>Navn</th><th class="text-center" >Karma</th><th>Medlem siden</th></tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="user in noobs"><td>{{user.name}}</td><td class="text-center">{{user.karma}}</td><td>{{formatTime(user.created)}}</td></tr>
+						</tbody>
+					</table>
+        		</div>
+			</rd-widget-body>
+		<rd-widget>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+   		<rd-widget>
+   			<rd-widget-header icon="fa-plus" title="Registrer deg noob">
+   			</rd-widget-header>
+   			<rd-widget-body>
+	   			<!-- Error messsage -->
+	   			<div class="alert alert-error" ng-show="showMessage">
+	                Legg til Sopra Steria kontoen din (navn@soprasteria.com)
+	            </div>
+	            <div class="alert alert-error" ng-show="showErrorMessage">
+	                {{regData.email}} er allerede registrert, bruk en annen mail.
+	            </div>
+	            <!-- add user form -->
+				<form role="form" autocomplete="off"  ng-submit="createUser(email, userName)" ng-hide="formSuccess">
+                	<div class="form-group">
+						<div class="input-group" data-validate="email">
+							<input ng-model="email" ng-keyup="emailChecker(email)" ng-blur="emailMessage()" type="email" class="form-control" name="validate-email" id="validate-email" placeholder="Din Sopra Steria epost" required value="" title="Legg inn din sopra steria epost">
+							<span ng-class="validation(eValid)" class="input-group-addon danger"><span class="glyphicon glyphicon-remove" ng-class="validationIcon(eValid)"></span></span>
+						</div>
+					</div>
+	                <div class="form-group">
+						<div class="input-group">
+							<input ng-model="userName" ng-keyup="nameChecker(userName)" type="text" class="form-control" name="validate-text" id="validate-text" placeholder="Ditt navn" required>
+							<span ng-class="validation(nameValid)" class="input-group-addon danger"><span class="glyphicon glyphicon-remove"  ng-class="validationIcon(nameValid)"></span></span>
+						</div>
+					</div>
+	                <button type="submit" id="btn-login" class="btn btn-default btn-lg btn-block" ng-class="validUser(eValid, nameValid)"> Lag bruker <i ng-show="creating" class="fa fa-cog fa-spin"></i> </button>
+                </form>
+                <div class="alert alert-success" ng-show="formSuccess">
+	                Takk for at du har opprettet en konto! Bruk eposten din til å registrere deg på kurs: {{regData.email}}
+	            </div>
+   			</rd-widget-body>
+   		</rd-widget>
+	</div>
+<!--	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-cog fa-spin" title="Loading Directive">
+				<a href="http://tobiasahlin.com/spinkit/" target="_blank">SpinKit</a>
+			</rd-widget-header>
+			<rd-widget-body>
+				<rd-loading></rd-loading>
+			</rd-widget-body>
+		</rd-widget>
+	</div>-->
+</div>
