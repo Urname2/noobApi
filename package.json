@@ -13,7 +13,8 @@
     "express": "~4.0.0",
     "mocha": "^2.4.5",
     "mongoose": "~4.4.3",
-    "mongoose-unique-validator": "^1.0.0"
+    "mongoose-unique-validator": "^1.0.0",
+    "nodemon": "^1.8.1"
   },
   "author": "Jorge",
   "license": "ISC"
