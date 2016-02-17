@@ -13,5 +13,4 @@ var consoleColor = {
 	}
 }
 
-
 module.exports = consoleColor;

@@ -8,7 +8,10 @@
   },
   "dependencies": {
     "body-parser": "~1.0.1",
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
     "express": "~4.0.0",
+    "mocha": "^2.4.5",
     "mongoose": "~4.4.3",
     "mongoose-unique-validator": "^1.0.0"
   },
