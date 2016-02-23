@@ -1,0 +1,94 @@
+::index.html
+
+<!--<script type="text/javascript" src="js/controllers/nerdProfile.js"></script>-->
+
+
+// =============================================================================================
+
+::routes.js
+
+...
+
+.state('nerd-profile', {
+    url: '/nerds/:nerdID',
+    templateUrl: 'templates/nerdProfile.html',
+    controller: "NerdProfile"
+});
+
+...
+
+// =============================================================================================
+
+::mainService.js
+
+
+...
+
+.factory('Nerd', function($http) {
+        return {
+            get : function() {
+                return $http.get('/api/nerds');
+            },
+            create : function(noobData) {
+                return $http.post('/api/nerds', noobData);
+            },
+            getNerd : function() {
+                //return $http.get('/api/nerds/' + nerdID);
+            }
+        }
+    });
+
+...
+
+
+
+// =============================================================================================
+
+::HTML
+
+
+<div ng-hide="loading">
+    <!-- Put content here -->
+    <div class="col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <img class="img-circle widget-icon pull-left" ng-src="{{nerd.img}}">
+                <div class="title">{{nerd.name}}</div>
+                <div class="comment">{{nerd.title}}</div>
+                <br />
+                <a href="#/nerds" class="btn btn-default text-right">Tilbake</a>
+            </rd-widget-body>
+        </rd-widget>
+  </div>
+</div>
+
+
+// =============================================================================================
+
+::JS
+
+angular.module('RDash')
+    .controller('NerdProfile', ['$scope','$stateParams', '$timeout', 'Nerd', NerdProfile]);
+
+function NerdProfile($scope, $stateParams, $timeout, Nerd) {
+    $scope.loading = true;
+
+    //console.log($stateParams.nerdId;)
+
+    /**
+     * Nerds
+     */
+
+    console.info($stateParams)
+
+    Nerd.getNerd($stateParams.nerdID)
+       .success(function(data) {
+            $scope.nerd = data;
+            $scope.loading = false;
+        });
+    
+    //using moment.js to format time
+    $scope.formatTime = function(time){
+        return moment(time).format('DD.MM.YY HH:mm:ss');
+    }
+}

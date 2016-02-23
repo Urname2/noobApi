@@ -20,7 +20,7 @@ var Nerd = require('./module/nerd');
 // mongodb://username:username@ds055925.mongolab.com:55925/noob
 // localhost: mongodb://localhost/noob
 
-var connectionString = '';
+var connectionString = 'mongodb://username:username@ds055895.mongolab.com:55895/nooby';
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -44,7 +44,7 @@ console.log('API available on localhost:' + port);
 
 // connecting to database
 if(connectionString)
-	mongoose.connect(connectionString); // connect to our database
+	mongoose.connect(connectionString); 
 
 else
 	console.log("Missing connectionString!");

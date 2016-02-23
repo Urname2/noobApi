@@ -25,13 +25,13 @@ describe('API requests', function() {
   
   // ==============================================================
 
-  it('should list ALL noobs on /api/noobs GET', function(done) {
+  it('should list ALL noobs on /api/noobs and eq to an array GET', function(done) {
   chai.request(server)
     .get('/api/noobs')
     .end(function(err, res){
       res.should.have.status(200);
       res.should.be.json;
-      res.body.should.be.a('object');
+      res.body.should.be.a('array');
       done();
     });
   });
