@@ -26,6 +26,11 @@ angular.module('RDash').config(['$stateProvider', '$urlRouterProvider',
                 url: '/nerds',
                 templateUrl: 'templates/nerds.html',
                 controller: "NerdCtrl"
+            })
+            .state('nerd-profile', {
+                url: '/nerds/:nerdID',
+                //templateUrl: 'templates/nerdProfile.html',
+                //controller: "NerdProfile"
             });
     }
 ]);

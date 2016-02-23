@@ -214,6 +214,18 @@ router.route('/api/nerds')
         });
     });
 
+// get the class with that id (accessed at GET http://localhost:1337/api/nerds/:nerd_id)
+// and the current speaker
+router.route('/api/nerds/:nerd_id')
+
+    .get(function(req, res) {
+        Nerd.findById(req.params.nerd_id, function(err, nerd) {
+            if (err)
+                res.send(err);
+            //get current nerd
+            res.json(nerd);
+        });
+    });
 
 
 app.use(router);

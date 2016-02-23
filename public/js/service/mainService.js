@@ -38,6 +38,9 @@ angular.module('RDash')
             },
             create : function(noobData) {
                 return $http.post('/api/nerds', noobData);
+            },
+            getNerd : function(nerdID) {
+                //return $http.get('/api/nerds/' + nerdID);
             }
         }
     });

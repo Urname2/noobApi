@@ -1,71 +1,78 @@
-<div class="row">
+<div class="row" ng-show="loading">
 	<div class="col-lg-12">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon green pull-left">
-					<i class="fa fa-book"></i>
-				</div>
-				<div class="title">{{course.title}}</div>
-				<div class="comment">{{course.description}}</div>
-			</rd-widget-body>
-		</rd-widget>
+		<rd-loading></rd-loading>
 	</div>
 </div>
-<div class="row">
-	<!-- when -->
-	<div class="col-lg-4">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon green pull-left">
-					<i class="fa fa-clock-o"></i>
-				</div>
-				<div class="title">{{course.startTime.date}}</div>
-				<div class="comment">{{course.startTime.hours}} | {{course.length}} time(r)</div>
-			</rd-widget-body>
-		</rd-widget>
+<div ng-hide="loading">
+	<div class="row">
+		<div class="col-lg-12">
+			<rd-widget>
+				<rd-widget-body>
+					<div class="widget-icon green pull-left">
+						<i class="fa fa-book"></i>
+					</div>
+					<div class="title">{{course.title}}</div>
+					<div class="comment">{{course.description}}</div>
+				</rd-widget-body>
+			</rd-widget>
+		</div>
 	</div>
-	<!-- where -->
-	<div class="col-lg-4">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon green pull-left">
-					<i class="fa fa-map-marker"></i>
+	<div class="row">
+		<!-- when -->
+		<div class="col-lg-4">
+			<rd-widget>
+				<rd-widget-body>
+					<div class="widget-icon green pull-left">
+						<i class="fa fa-clock-o"></i>
+					</div>
+					<div class="title">{{course.startTime.date}}</div>
+					<div class="comment">{{course.startTime.hours}} | {{course.length}} time(r)</div>
+				</rd-widget-body>
+			</rd-widget>
+		</div>
+		<!-- where -->
+		<div class="col-lg-4">
+			<rd-widget>
+				<rd-widget-body>
+					<div class="widget-icon green pull-left">
+						<i class="fa fa-map-marker"></i>
+					</div>
+					<div class="title">{{course.members.length}} / {{course.maxMembers}}</div>
+					<div class="comment">Hvor: {{course.where}}</div>
+				</rd-widget-body>
+			</rd-widget>
+		</div>
+		<!-- who -->
+	   <div class="col-lg-4">
+			<rd-widget>
+			  <rd-widget-body>
+			    <img class="img-circle widget-icon pull-left" ng-src="{{nerd.img}}">
+			    <div class="title">{{nerd.name}}</div>
+			    <div class="comment">{{nerd.title}}</div>
+			  </rd-widget-body>
+			</rd-widget>
+	  	</div>
+	  	<!-- members -->
+	   <div class="col-lg-12">
+			<rd-widget>
+			  <rd-widget-body>
+			    <div class="widget-icon green pull-left">
+					<i class="fa fa-users"></i>
 				</div>
-				<div class="title">{{course.members.length}} / {{course.maxMembers}}</div>
-				<div class="comment">Hvor: {{course.where}}</div>
-			</rd-widget-body>
-		</rd-widget>
+			    <div class="title">Attendies</div>
+			    <div class="comment">
+			    	<form autocomplete="off" ng-submit="submitName()">
+		              <div class="input-group">
+		                 <input ng-model="attendeeName" class="btn btn-lg" name="name" id="name" type="text" placeholder="SopraSteria mail" required="">
+		                 <button class="btn btn-info btn-lg" type="submit">Join</button>
+		              </div>
+	             	</form>
+			    </div>  
+			    <ul class="list-group checked-list-box">
+			    	<li class="list-group-item" ng-repeat="person in course.members track by $index"><span class="state-icon glyphicon glyphicon-unchecked"></span> {{person.noob_name}} <span class="text-muted pull-right"> {{formatTime(person.created)}}</span></li>
+			    </ul>
+			  </rd-widget-body>
+			</rd-widget>
+	  	</div>
 	</div>
-	<!-- who -->
-   <div class="col-lg-4">
-		<rd-widget>
-		  <rd-widget-body>
-		    <img class="img-circle widget-icon pull-left" ng-src="{{nerd.img}}">
-		    <div class="title">{{nerd.name}}</div>
-		    <div class="comment">{{nerd.title}}</div>
-		  </rd-widget-body>
-		</rd-widget>
-  	</div>
-  	<!-- members -->
-   <div class="col-lg-12">
-		<rd-widget>
-		  <rd-widget-body>
-		    <div class="widget-icon green pull-left">
-				<i class="fa fa-users"></i>
-			</div>
-		    <div class="title">Attendies</div>
-		    <div class="comment">
-		    	<form autocomplete="off" ng-submit="submitName()">
-	              <div class="input-group">
-	                 <input ng-model="attendeeName" class="btn btn-lg" name="name" id="name" type="text" placeholder="SopraSteria mail" required="">
-	                 <button class="btn btn-info btn-lg" type="submit">Join</button>
-	              </div>
-             	</form>
-		    </div>  
-		    <ul class="list-group checked-list-box">
-		    	<li class="list-group-item" ng-repeat="person in course.members track by $index"><span class="state-icon glyphicon glyphicon-unchecked"></span> {{person.noob_name}} <span class="text-muted pull-right"> {{formatTime(person.created)}}</span></li>
-		    </ul>
-		  </rd-widget-body>
-		</rd-widget>
-  	</div>
 </div>

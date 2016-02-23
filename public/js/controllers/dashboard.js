@@ -6,9 +6,13 @@ angular.module('RDash')
     .controller('DashboardCtrl', ['$scope','Noobs', 'Class', DashboardCtrl]);
 
 function DashboardCtrl($scope, Noobs, Class) {
+    $scope.loading = true;
     $scope.eValid = false;
     $scope.nameValid = false;
     $scope.showMessage = false;
+
+    $scope.noobs = [];
+    $scope.courses = [];
 
     $scope.emailMessage = function(){
         if($scope.eValid)
@@ -22,21 +26,24 @@ function DashboardCtrl($scope, Noobs, Class) {
     Noobs.get()
         .success(function(data) {
             $scope.noobs = data;
+
+             /**
+             * Classes
+             */
+            
+            Class.get()
+            .success(function(data) {
+                $scope.courses = data;
+                $scope.loading = false;
+            });
+
         });
 
 
     $scope.formatTime = function(time){
         return moment(time).format('DD.MM.YYYY HH:mm');
     }
-
-    /**
-     * Classes
-     */
-    Class.get()
-        .success(function(data) {
-            $scope.courses = data;
-        });
-
+    
     $scope.emailChecker = function(email){
         if(/@soprasteria.com\s*$/.test(email)){
             $scope.eValid = true;
@@ -80,10 +87,9 @@ function DashboardCtrl($scope, Noobs, Class) {
     }
 
     $scope.createUser = function(mail, name){
-        $scope.creating = true;
         $scope.showErrorMessage = false;
-        if($scope.eValid, $scope.nameValid){
-            
+        if($scope.eValid && $scope.nameValid){
+            $scope.creating = true;    
             var form = this;
             //model
             $scope.regData = {

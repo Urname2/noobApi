@@ -6,7 +6,7 @@ angular.module('RDash')
     .controller('ClassCtrl', ['$scope','$stateParams','Noobs', 'Class', ClassCtrl]);
 
 function ClassCtrl($scope, $stateParams, Noobs, Class) {
-    
+    $scope.loading = true;    
     /**
      * Classes
      */
@@ -22,6 +22,7 @@ function ClassCtrl($scope, $stateParams, Noobs, Class) {
                 date : moment(data.when).format('DD.MM.YYYY'),
                 hours : moment(data.when).format('HH:mm')
             }
+            $scope.loading = false;    
         });
 
     $scope.submitName = function(){

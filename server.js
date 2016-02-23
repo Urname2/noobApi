@@ -1,5 +1,3 @@
-// server.js
-// https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
 
 // BASE SETUP
 // =============================================================================
@@ -8,17 +6,20 @@
 var express    = require('express');            // call express
 var app        = express();                     // define our app using express
 var bodyParser = require('body-parser');
-var console    = require('./models/consoletxt'); // call the console text module
+var console    = require('./module/consoletxt'); // call the console text module
 var mongoose   = require('mongoose');            // database connector
 
 
 //models
-var Noob  = require('./models/noob');
-var Class = require('./models/class');
-var Nerd = require('./models/nerd');
+var Noob  = require('./module/noob');
+var Class = require('./module/class');
+var Nerd = require('./module/nerd');
 
 
-// create your own database: https://mongolab.com/ mongodb://username:username@ds055925.mongolab.com:55925/noob
+// create your own database: https://mongolab.com/
+// mongodb://username:username@ds055925.mongolab.com:55925/noob
+// localhost: mongodb://localhost/noob
+
 var connectionString = '';
 
 // configure app to use bodyParser()

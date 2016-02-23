@@ -1,6 +1,7 @@
 //Behavior-driven development 
 //chai api: http://chaijs.com/api/bdd/
 
+// husk at should = to 
 
 var chai = require('chai');
 var chaiHttp = require('chai-http');
@@ -8,6 +9,7 @@ var server = require('../server');
 var should = chai.should();
 
 chai.use(chaiHttp);
+
 describe('API requests', function() {
   
   // ==============================================================
@@ -29,10 +31,11 @@ describe('API requests', function() {
     .end(function(err, res){
       res.should.have.status(200);
       res.should.be.json;
-      res.body.should.be.a('array');
+      res.body.should.be.a('object');
       done();
     });
   });
+
 
   it('should check the model of a noob GET', function(done) {
   chai.request(server)
@@ -50,6 +53,8 @@ describe('API requests', function() {
       
       // check field content
       res.body[3].should.have.property('karma');
+
+      res.body[3].karma.should.equal(4);
       res.body[3].name.should.equal('Foo Bar');
       res.body[3].email.should.equal('foo.bar@soprasteria.com');
 
@@ -93,7 +98,7 @@ describe('API requests', function() {
   it('should remove a nerd REMOVE', function(done){
     chai.request(server)
     .delete('/api/nerds')
-    .send({name : "Jørgen Brække"})
+    .send({name : "Ola Nordmann"})
     .end(function(err, res){
       res.should.have.status(200)
       res.should.be.json;
@@ -141,4 +146,43 @@ describe('API requests', function() {
   }); // checking api
 
   // ==============================================================
+
 });
+
+
+describe('Logiske tester', function() {
+  it('boolean should be true', function(done){
+    var youAreCool = false;
+    youAreCool.should.be.true;
+    done();
+  });
+
+  it('string should be string', function(done){
+    var yourName = null;
+    yourName.should.be.a('Object');
+    done();
+  });
+
+  it('foo bar testm should be quux', function(done){
+    var obj = { foo: { bar: { baz: 'quux' } } };
+    obj.should.have.deep.property('foo.bar.baz', 'jabadahut');
+    done();
+  });
+
+  it('array should an array and contain 4 items', function(done){
+    var array = [1,2,3,4];
+    array.should.be.an.instanceof(String);
+    array.should.have.length(5);
+    array.should.have.length.above(5);
+    done();
+  });
+
+  it('ullared should contain Ola-Conny, Morgan, Boris, Kassadama, not 4,2,1', function(done){
+    var ullared = ["Ola-Conny","Morgan", "Boris", "Kassedama"];
+    ullared.should.include.members(["1", "2"]);
+    ullared.should.not.include.members(["Boris", 2, "Morgan"]);
+
+    done();
+  })
+
+})
